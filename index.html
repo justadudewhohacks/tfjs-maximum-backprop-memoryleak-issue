@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="index.ts"></script>
+</head>
+<body>
+  <button onclick="run()"> Run </button>
+  <script>
+    function run() {
+
+      const iterations = 5
+      let ts = Date.now()
+
+      console.log('before forward:')
+      console.log(printMemory())
+
+      runForward(iterations)
+
+      console.log('after forward:')
+      console.log(printMemory())
+      console.log('time: %s ms', Date.now() - ts)
+
+      console.log('before train (without applying tf.maximum):')
+      console.log(printMemory())
+
+      ts = Date.now()
+      runTrain(iterations, false)
+
+      console.log('after train (without applying tf.maximum):')
+      console.log(printMemory())
+      console.log('training time without applying tf.maximum: %s ms', Date.now() - ts)
+
+      console.log('before train (with applying tf.maximum):')
+      console.log(printMemory())
+
+      ts = Date.now()
+      runTrain(iterations, true)
+
+      console.log('after train (with applying tf.maximum):')
+      console.log(printMemory())
+      console.log('training time with applying tf.maximum: %s ms', Date.now() - ts)
+
+    }
+
+  </script>
+
+</body>
+</html>
